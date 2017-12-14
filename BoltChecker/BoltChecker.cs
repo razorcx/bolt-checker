@@ -169,7 +169,7 @@ namespace BoltChecker
 			try
 			{
 				var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
-				string path = $"d:\\{_model.GetProjectInfo().Name}.pdf";
+				string path = $"d:\\RazorCX\\Development\\{_model.GetProjectInfo().Name} {textBoxProperties.Text.TrimEnd(' ')}.pdf";
 				PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
 				pdfDoc.Open();
 
