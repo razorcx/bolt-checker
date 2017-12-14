@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Tekla.Structures.Model;
 using Tekla.Structures.Model.UI;
 
@@ -124,16 +128,6 @@ namespace BoltChecker
 			dataGridViewResults.DataSource = boltViews;
 		}
 
-		private BoltResult GetBoltResult(BoltArray bolt)
-		{
-			return new BoltResult
-			{
-				Size = Math.Round(bolt.BoltSize, 2).ToString(),
-				Standard = bolt.BoltStandard,
-				Type = bolt.BoltType,
-			};
-		}
-
 		private void displayBoltsInModel_Click(object sender, EventArgs e)
 		{
 			if (!_boltResults.Any()) return;
@@ -153,6 +147,108 @@ namespace BoltChecker
 					var text = $"{Math.Round(b.BoltSize, 2)} {b.BoltStandard} {b.BoltType}";
 					drawer.DrawText(location, text, color);
 				});
+		}
+
+		private void buttonExportToPdf_Click(object sender, EventArgs e)
+		{
+			ExportToPdf();
+		}
+
+		private BoltResult GetBoltResult(BoltArray bolt)
+		{
+			return new BoltResult
+			{
+				Size = Math.Round(bolt.BoltSize, 2).ToString(),
+				Standard = bolt.BoltStandard,
+				Type = bolt.BoltType,
+			};
+		}
+
+		private void ExportToPdf()
+		{
+			try
+			{
+				var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
+				string path = $"d:\\{_model.GetProjectInfo().Name}.pdf";
+				PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
+				pdfDoc.Open();
+
+				var imagepath = @"D:\RazorCX\Logos\Logo.png";
+				using (FileStream fs = new FileStream(imagepath, FileMode.Open))
+				{
+					var png = Image.GetInstance(System.Drawing.Image.FromStream(fs), ImageFormat.Png);
+					png.ScalePercent(5f);
+					png.SetAbsolutePosition(pdfDoc.Left, pdfDoc.Top);
+					pdfDoc.Add(png);
+				}
+
+				var spacer = new Paragraph("")
+				{
+					SpacingBefore = 10f,
+					SpacingAfter = 10f,
+				};
+				pdfDoc.Add(spacer);
+
+				var headerTable = new PdfPTable(new[] { .75f, 2f })
+				{
+					HorizontalAlignment = Left,
+					WidthPercentage = 75,
+					DefaultCell = { MinimumHeight = 22f }
+				};
+
+				headerTable.AddCell("Date");
+				headerTable.AddCell(DateTime.Now.ToString());
+				headerTable.AddCell("Name");
+				headerTable.AddCell(textBoxName.Text);
+				headerTable.AddCell("Project Number");
+				headerTable.AddCell(textBoxNumber.Text);
+				headerTable.AddCell("Builder");
+				headerTable.AddCell(textBoxBuilder.Text);
+
+				pdfDoc.Add(headerTable);
+				pdfDoc.Add(spacer);
+
+				var columnCount = dataGridViewResults.ColumnCount;
+				var columnWidths = new[] { 0.75f, 2f, 2f, 0.75f };
+
+				var table = new PdfPTable(columnWidths)
+				{
+					HorizontalAlignment = Left,
+					WidthPercentage = 100,
+					DefaultCell = { MinimumHeight = 22f }
+				};
+
+				var cell = new PdfPCell(new Phrase("Bolt Summary"))
+				{
+					Colspan = columnCount,
+					HorizontalAlignment = 1,  //0=Left, 1=Centre, 2=Right
+					MinimumHeight = 30f
+				}; 
+
+				table.AddCell(cell);
+
+				dataGridViewResults.Columns
+					.OfType<DataGridViewColumn>()
+					.ToList()
+					.ForEach(c => table.AddCell(c.Name));
+
+				dataGridViewResults.Rows
+					.OfType<DataGridViewRow>()
+					.ToList()
+					.ForEach(r =>
+					{
+						var cells = r.Cells.OfType<DataGridViewCell>().ToList();
+						cells.ForEach(c => table.AddCell(c.Value.ToString()));
+					});
+
+				pdfDoc.Add(table);
+
+				pdfDoc.Close();
+			}
+			catch (Exception ex)
+			{
+				
+			}
 		}
 	}
 }

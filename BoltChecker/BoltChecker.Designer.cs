@@ -47,6 +47,7 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.textBoxNumber = new System.Windows.Forms.TextBox();
 			this.buttonSelectBoltsInModel = new System.Windows.Forms.Button();
+			this.buttonExportToPdf = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
 			this.SuspendLayout();
@@ -54,9 +55,9 @@
 			// btnUpdate
 			// 
 			this.btnUpdate.AutoSize = true;
-			this.btnUpdate.Location = new System.Drawing.Point(372, 579);
+			this.btnUpdate.Location = new System.Drawing.Point(408, 579);
 			this.btnUpdate.Name = "btnUpdate";
-			this.btnUpdate.Size = new System.Drawing.Size(208, 42);
+			this.btnUpdate.Size = new System.Drawing.Size(172, 42);
 			this.btnUpdate.TabIndex = 11;
 			this.btnUpdate.Text = "Update";
 			this.btnUpdate.UseVisualStyleBackColor = true;
@@ -210,17 +211,29 @@
 			this.buttonSelectBoltsInModel.AutoSize = true;
 			this.buttonSelectBoltsInModel.Location = new System.Drawing.Point(28, 579);
 			this.buttonSelectBoltsInModel.Name = "buttonSelectBoltsInModel";
-			this.buttonSelectBoltsInModel.Size = new System.Drawing.Size(208, 42);
+			this.buttonSelectBoltsInModel.Size = new System.Drawing.Size(181, 42);
 			this.buttonSelectBoltsInModel.TabIndex = 28;
 			this.buttonSelectBoltsInModel.Text = "Select In Model";
 			this.buttonSelectBoltsInModel.UseVisualStyleBackColor = true;
 			this.buttonSelectBoltsInModel.Click += new System.EventHandler(this.displayBoltsInModel_Click);
+			// 
+			// buttonExportToPdf
+			// 
+			this.buttonExportToPdf.AutoSize = true;
+			this.buttonExportToPdf.Location = new System.Drawing.Point(215, 579);
+			this.buttonExportToPdf.Name = "buttonExportToPdf";
+			this.buttonExportToPdf.Size = new System.Drawing.Size(187, 42);
+			this.buttonExportToPdf.TabIndex = 29;
+			this.buttonExportToPdf.Text = "Export To PDF";
+			this.buttonExportToPdf.UseVisualStyleBackColor = true;
+			this.buttonExportToPdf.Click += new System.EventHandler(this.buttonExportToPdf_Click);
 			// 
 			// BoltChecker
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(612, 633);
+			this.Controls.Add(this.buttonExportToPdf);
 			this.Controls.Add(this.buttonSelectBoltsInModel);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.textBoxNumber);
@@ -242,6 +255,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "BoltChecker";
 			this.Text = "Bolt Checker";
+			this.TopMost = true;
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).EndInit();
 			this.ResumeLayout(false);
@@ -269,6 +283,7 @@
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox textBoxNumber;
 		private System.Windows.Forms.Button buttonSelectBoltsInModel;
+		private System.Windows.Forms.Button buttonExportToPdf;
 	}
 }
 
