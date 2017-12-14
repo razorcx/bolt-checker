@@ -85,18 +85,6 @@
 			// 
 			this.listBoxSize.FormattingEnabled = true;
 			this.listBoxSize.ItemHeight = 16;
-			this.listBoxSize.Items.AddRange(new object[] {
-            "",
-            "9.53",
-            "12.7",
-            "15.88",
-            "19.05",
-            "22.23",
-            "25.4",
-            "28.58",
-            "31.75",
-            "34.925",
-            "38.1"});
 			this.listBoxSize.Location = new System.Drawing.Point(28, 124);
 			this.listBoxSize.Name = "listBoxSize";
 			this.listBoxSize.Size = new System.Drawing.Size(120, 132);
@@ -107,13 +95,6 @@
 			// 
 			this.listBoxStandard.FormattingEnabled = true;
 			this.listBoxStandard.ItemHeight = 16;
-			this.listBoxStandard.Items.AddRange(new object[] {
-            "",
-            "A307",
-            "A325N",
-            "A325SC",
-            "A490N",
-            "A490SC"});
 			this.listBoxStandard.Location = new System.Drawing.Point(154, 124);
 			this.listBoxStandard.Name = "listBoxStandard";
 			this.listBoxStandard.Size = new System.Drawing.Size(166, 132);
@@ -142,10 +123,6 @@
 			// 
 			this.listBoxType.FormattingEnabled = true;
 			this.listBoxType.ItemHeight = 16;
-			this.listBoxType.Items.AddRange(new object[] {
-            "",
-            "Workshop",
-            "Site"});
 			this.listBoxType.Location = new System.Drawing.Point(326, 124);
 			this.listBoxType.Name = "listBoxType";
 			this.listBoxType.Size = new System.Drawing.Size(254, 132);

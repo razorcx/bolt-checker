@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeklaExtensionMethods.cs" />
     <EmbeddedResource Include="BoltChecker.resx">
       <DependentUpon>BoltChecker.cs</DependentUpon>
     </EmbeddedResource>
